@@ -1,0 +1,56 @@
+﻿@page
+@model BugTracker.WebUI.Pages.BugsModel
+    @using System.ComponentModel.DataAnnotations;
+
+    @{
+    }
+
+    <h1>Bug List</h1>
+
+    <p>
+        <a asp-page="CreateBug">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Bug ID
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    User
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.bugs)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BugID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BugTitle)
+                    </td>
+                    <td>
+                        @item.Status.ToString()
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssignedUser.Name)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.BugID">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.BugID">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.BugID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
